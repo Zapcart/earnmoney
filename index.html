@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Partner Search - Private & Fun Opportunity</title>
     <style>
+        html {
+            scroll-behavior: smooth;
+        }
         body {
             margin: 0;
             padding: 0;
@@ -26,10 +29,21 @@
             height: 100%;
             background: rgba(255, 192, 203, 0.6);
         }
+        .banner {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: #ff1493;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            font-size: 1.2em;
+            z-index: 1000;
+        }
         .container {
             position: relative;
-            max-width: 900px; /* Increased width */
-            margin: 30px;
+            max-width: 900px;
+            margin: 60px 30px 30px; /* Adjusted for banner */
             background: rgba(255, 255, 255, 0.95);
             padding: 40px;
             border-radius: 20px;
@@ -41,7 +55,7 @@
             50% { transform: translateY(-15px); }
         }
         .profile-pic {
-            width: 150px; /* Larger profile pic */
+            width: 150px;
             height: 150px;
             border-radius: 50%;
             border: 6px solid #ff69b4;
@@ -52,7 +66,7 @@
         }
         h1 {
             color: #c71585;
-            font-size: 3em; /* Larger heading */
+            font-size: 3em;
             margin: 20px 0;
             text-align: center;
             position: relative;
@@ -68,7 +82,7 @@
             vertical-align: middle;
         }
         p {
-            font-size: 1.4em; /* Larger text */
+            font-size: 1.4em;
             margin: 15px 0;
             text-align: center;
         }
@@ -81,12 +95,12 @@
             display: flex;
             flex-direction: column;
             gap: 20px;
-            max-width: 600px; /* Wider form */
+            max-width: 600px;
             margin-left: auto;
             margin-right: auto;
         }
-        input, textarea {
-            padding: 15px; /* Larger input fields */
+        input, textarea, select {
+            padding: 15px;
             font-size: 1.2em;
             border: 2px solid #ff69b4;
             border-radius: 10px;
@@ -95,7 +109,7 @@
             background: rgba(255, 255, 255, 0.8);
             transition: border-color 0.3s;
         }
-        input:focus, textarea:focus {
+        input:focus, textarea:focus, select:focus {
             border-color: #c71585;
             outline: none;
         }
@@ -103,7 +117,7 @@
             background: linear-gradient(45deg, #ff69b4, #c71585);
             color: white;
             padding: 15px;
-            font-size: 1.3em; /* Larger button text */
+            font-size: 1.3em;
             border: none;
             border-radius: 10px;
             cursor: pointer;
@@ -118,13 +132,13 @@
             margin-top: 20px;
             font-size: 1.2em;
         }
-        .why-join, .testimonials {
+        .why-join, .testimonials, .calculator, .faq {
             margin-top: 40px;
             padding: 20px;
             background: rgba(255, 255, 255, 0.5);
             border-radius: 15px;
         }
-        .why-join h2, .testimonials h2 {
+        .why-join h2, .testimonials h2, .calculator h2, .faq h2 {
             color: #c71585;
             font-size: 2em;
             margin-bottom: 20px;
@@ -166,6 +180,37 @@
             text-align: right;
             margin-top: 10px;
         }
+        .calculator p {
+            font-size: 1.2em;
+        }
+        .calculator select {
+            width: 200px;
+            margin: 10px 0;
+        }
+        .calculator .result {
+            font-weight: bold;
+            color: #ff1493;
+            margin-top: 10px;
+        }
+        .faq .question {
+            font-weight: bold;
+            color: #c71585;
+            margin: 15px 0 5px;
+        }
+        .faq .answer {
+            font-size: 1.1em;
+            color: #555;
+        }
+        .social-proof {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 1.2em;
+            color: #c71585;
+        }
+        .social-proof span {
+            font-weight: bold;
+            color: #ff1493;
+        }
         .footer {
             margin-top: 30px;
             font-size: 1em;
@@ -188,6 +233,7 @@
     </style>
 </head>
 <body>
+    <div class="banner">🏃‍♀️ Limited Spots Left! Join Now Before They’re Gone! 🏃‍♀️</div>
     <div class="overlay"></div>
     <div class="container">
         <div class="profile-pic"></div>
@@ -204,6 +250,23 @@
             <textarea id="message" placeholder="Any additional message (optional)" rows="5"></textarea>
             <button type="submit">Send via Telegram</button>
         </form>
+
+        <div class="social-proof">
+            <p>Already <span>25+</span> people have joined this opportunity!</p>
+        </div>
+
+        <div class="calculator">
+            <h2>Calculate Your Earnings</h2>
+            <p>How many sessions can you do daily?</p>
+            <select id="sessions">
+                <option value="1">1 Session</option>
+                <option value="2">2 Sessions</option>
+                <option value="3">3 Sessions</option>
+                <option value="4">4 Sessions</option>
+                <option value="5">5 Sessions</option>
+            </select>
+            <p class="result" id="earningResult">Potential Earnings: ₹0</p>
+        </div>
 
         <div class="why-join">
             <h2>Why Join Me?</h2>
@@ -225,6 +288,16 @@
                 <p>"I was hesitant at first, but the privacy and support made me feel so comfortable. Highly recommend!"</p>
                 <div class="author">- Anjali, Mumbai</div>
             </div>
+        </div>
+
+        <div class="faq">
+            <h2>Frequently Asked Questions</h2>
+            <div class="question">Is my privacy really guaranteed?</div>
+            <div class="answer">Yes, absolutely! All sessions are 100% private, and your personal information is never shared.</div>
+            <div class="question">How will I get paid?</div>
+            <div class="answer">Payments are made daily via secure methods like UPI or bank transfer, as per your preference.</div>
+            <div class="question">What if I’m not comfortable after joining?</div>
+            <div class="answer">You can leave anytime—no questions asked. Your comfort is our priority.</div>
         </div>
 
         <div class="footer">
@@ -249,6 +322,15 @@
             const telegramLink = `https://t.me/arkalgolabs?text=${encodedMessage}`;
             
             window.open(telegramLink, '_blank');
+        });
+
+        const sessionsSelect = document.getElementById('sessions');
+        const earningResult = document.getElementById('earningResult');
+        sessionsSelect.addEventListener('change', function() {
+            const sessions = parseInt(this.value);
+            const minEarning = sessions * 5000;
+            const maxEarning = sessions * 10000;
+            earningResult.textContent = `Potential Earnings: ₹${minEarning} - ₹${maxEarning} per day`;
         });
     </script>
 </body>
